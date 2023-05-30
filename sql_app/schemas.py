@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from pydantic import BaseModel
 
 
@@ -15,3 +17,23 @@ class Category(CategoryBase):
 
     class Config:
         orm_mode = True
+
+
+class ProductBase(BaseModel):
+    name: str
+    description: str
+    price: int
+    quantity: int
+    created_at: datetime
+
+
+class ProductCreate(ProductBase):
+    category_id: int
+
+
+class Product(ProductBase):
+    id: int
+    category: Category
+
+    class Config:
+        orm_mode: True
