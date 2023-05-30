@@ -1,6 +1,8 @@
 from datetime import datetime
+from typing import Optional
 
 from pydantic import BaseModel
+from pydantic.schema import Decimal
 
 
 class CategoryBase(BaseModel):
@@ -24,7 +26,7 @@ class ProductBase(BaseModel):
     description: str
     price: int
     quantity: int
-    created_at: datetime
+    created_at: Optional[datetime] = None
 
 
 class ProductCreate(ProductBase):
@@ -36,4 +38,4 @@ class Product(ProductBase):
     category: Category
 
     class Config:
-        orm_mode: True
+        orm_mode = True
